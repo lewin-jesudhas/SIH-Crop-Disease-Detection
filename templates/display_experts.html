@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>View Experts</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='view_experts.css') }}">
+    </head>
+    <body>
+        <div class="container">
+            <h2>View Experts</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Phone Number</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for expert in experts %}
+                    <tr>
+                        <td>{{ expert.name }}</td>
+                        <td><a href = "tel:+91{{ expert.phone }}">+91{{ expert.phone }}</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Farmer Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+</head>
+<body>
+    <div class="background-image">
+        <div class="container">
+            <div class="login-box">
+                <h1>Farmer Login</h1>
+                <form action="/farmer_login" method="POST">
+                    <input type="text" name="phonenumber" placeholder="Phone Number" required>
+                    <input type="password" name="password" placeholder="Password" required>
+                    <button type="submit">Login</button>
+                </form>
+                <p>Not registered? <a href="/register">Register as farmer</a></p>
+                <p>Not a farmer? <a href="/expert">Login as an expert</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    {% if message %}
+        alert("{{ message }}")
+    {% endif %}
+</script>
+</html>

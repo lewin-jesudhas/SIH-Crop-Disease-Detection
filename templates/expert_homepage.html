@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+    <title>Farmico</title>
+</head>
+<body>
+    <div class="container">
+        <div class="centered-box">
+            <div class="align-right">
+                <a href="/expert" class="login-link">Log out</a>
+            </div>
+
+            <h1>Farmico</h1>
+            
+            Thank you for choosing Farmico!
+    </div>
+<script>
+    {% if message %}
+        alert("{{ message }}")
+    {% endif %}
+    function getLocation(){
+        if (navigator.geolocation){
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            alert("Geolocation not supported by this browser!")
+        }
+    }
+
+    function showPosition(position){
+        var latitude = position.coords.latitude
+        var longitude = position.coords.longitude
+
+        fetch("/update_location_expert", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({latitude, longitude}),
+        })
+        .catch(error => {
+            console.error("Error in sending location data:", error);
+        })
+    }
+
+    getLocation();
+</script>
+</body>
+</html>

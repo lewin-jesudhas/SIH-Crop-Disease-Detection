@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Plant Disease Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="rounded-rectangle">
+            <header>
+                <h1>Plant Disease Detection</h1>
+            </header>
+            <main>
+                <form action="/upload" method="POST" enctype="multipart/form-data" id="upload-form">
+                    <input type="file" name="image" accept="image/*" required>
+                    <button type="submit">Upload</button>
+                </form>
+                <div class="result" id="result">
+                    <!-- Display the result here -->
+                </div>
+            </main>
+            <a href="/recommendations"> View Recommendations</a>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

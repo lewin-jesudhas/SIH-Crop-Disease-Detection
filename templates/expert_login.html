@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Expert Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+</head>
+<body>
+    <div class="background-image">
+        <div class="container">
+            <div class="login-box">
+                <h1>Expert Login</h1>
+                <form action="/expert_login" method="POST">
+                    <input type="email" name="email" placeholder="Email" required>
+                    <input type="password" name="password" placeholder="Password" required>
+                    <button type="submit">Login</button>
+                </form>
+                <p>Not an expert? <a href="/">Login as a farmer</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    {% if message %}
+        alert("{{ message }}")
+    {% endif %}
+</script>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='weatherpage.css') }}">
+    <title>Weather App</title>
+</head>
+<body>
+    <div class="container">
+        <div class="weather-card">
+            <header>
+                <h1>Weather App</h1>
+            </header>
+            <main>
+                {% if weather_data %}
+                <div class="current-weather">
+                    <h2>Current Weather in {{ city }}</h2>
+                    <p>Temperature: {{ weather_data.main.temp }}°C</p>
+                    <p>Humidity: {{ weather_data.main.humidity }}%</p>
+                    {% if weather_data.rain %}
+                        <p>Rainfall: {{ weather_data.rain['3h'] }} mm</p>
+                        {% else %}
+                        <p>No rainfall expected</p>
+                        {% endif %}
+                    <!-- Add more current weather details here -->
+                </div>
+                {% endif %}
+                {% if forecast_data %}
+                <div class="forecast">
+                    <h2>3-Day Forecast for {{ city }}</h2>
+                    {% for forecast in forecast_data.list %}
+                    {% if loop.index <= 3 %} {# Display only the next 3 days #}
+                    <div class="forecast-day">
+                        <h3>Day {{ loop.index }}</h3>
+                        <p>Temperature: {{ forecast.main.temp }}°C</p>
+                        <p>Humidity: {{ forecast.main.humidity }}%</p>
+                        <!-- Add more forecast details here -->
+                        {% if forecast.rain %}
+                        <p>Rainfall: {{ forecast.rain['3h'] }} mm</p>
+                        {% else %}
+                        <p>No rainfall expected</p>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </main>
+        </div>
+    </div>
+    <!-- <script src="{{ url_for('static', filename='script.js') }}"></script> -->
+</body>
+</html>

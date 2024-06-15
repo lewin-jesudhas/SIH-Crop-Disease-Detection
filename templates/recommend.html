@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Farmer Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+</head>
+<body>
+    <div class="background-image">
+        <div class="container">
+            {% if data %}
+                <h1>Condition:</h1>
+                <p>{{ data['condition']}}</p>
+                <h1>Description:</h1>
+                <p>{{ data['description']}}</p>
+                <h1>Pesticides:</h1>
+                <p>{{ data['pesticides'] }}</p>
+                <h1>Fertilizers:</h1>
+                <p>{{ data['fertilizers'] }}</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+<script>
+    {% if message %}
+        alert("{{ message }}")
+    {% endif %}
+</script>
+</html>

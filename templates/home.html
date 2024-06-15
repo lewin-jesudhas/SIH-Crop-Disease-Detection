@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+    <title>Farmico</title>
+</head>
+<body>
+    <div class="container">
+        <div class="centered-box">
+            <div class="align-right">
+                <a href="/" class="login-link">Log out</a>
+            </div>
+
+            <h1>Farmico</h1>
+            
+            <div class="button-container">
+                <button class="action-button" onclick="window.location.href='detect_disease'" >
+                    <img src="{{ url_for('static', filename='scanner.png') }}" alt="Scan">
+                    <span>Scan</span>
+                </button>
+                <button class="action-button" onclick="window.location.href='view_experts'">
+                    <img src="{{ url_for('static', filename='expert.png') }}" alt="Expert">
+                    <span>Expert</span>
+                </button>
+                <button class="action-button" onclick="window.location.href='weather_data'">
+                    <img src="{{ url_for('static', filename='weather.png') }}" alt="Weather">
+                    <span>Weather</span>
+                </button>
+            </div>
+        </div>
+    </div>
+<script>
+    {% if message %}
+        alert("{{ message }}")
+    {% endif %}
+    function getLocation(){
+        if (navigator.geolocation){
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            alert("Geolocation not supported by this browser!")
+        }
+    }
+
+    function showPosition(position){
+        var latitude = position.coords.latitude
+        var longitude = position.coords.longitude
+
+        fetch("/update_location", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({latitude, longitude}),
+        })
+        .catch(error => {
+            console.error("Error in sending location data:", error);
+        })
+    }
+
+    getLocation();
+</script>
+</body>
+</html>
